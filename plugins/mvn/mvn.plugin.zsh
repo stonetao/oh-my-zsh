@@ -53,11 +53,8 @@ alias mvn="mvn-or-mvnw"
 alias 'mvn!'='mvn -f $(git rev-parse --show-toplevel 2>/dev/null || echo ".")/pom.xml'
 
 # aliases
-alias mvnag='mvn archetype:generate'
-alias mvnboot='mvn spring-boot:run'
-alias mvnc='mvn clean'
-alias mvncd='mvn clean deploy'
-alias mvnce='mvn clean eclipse:clean eclipse:eclipse'
+alias mvncini='mvn clean initialize'
+alias mvncie='mvn clean install eclipse:eclipse'
 alias mvnci='mvn clean install'
 alias mvncie='mvn clean install eclipse:eclipse'
 alias mvncini='mvn clean initialize'
@@ -332,7 +329,7 @@ function listMavenCompletions {
 function listMavenCompletions { 
     reply=(
         # common lifecycle
-        clean process-resources compile process-test-resources test-compile test integration-test package verify install deploy site
+        clean initialize process-resources compile process-test-resources test-compile test integration-test package verify install deploy site
 
         # common plugins
         deploy failsafe install site surefire checkstyle javadoc jxr pmd ant antrun archetype assembly dependency enforcer gpg help release repository source eclipse idea jetty cargo jboss tomcat tomcat6 tomcat7 exec versions war ear ejb android scm buildnumber nexus repository sonar license hibernate3 liquibase flyway gwt
