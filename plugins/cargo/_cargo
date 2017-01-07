@@ -48,6 +48,7 @@ case $state in
                     '--target=[target triple]: :_get_targets' \
                     '(-v, --verbose)'{-v,--verbose}'[use verbose output]' \
                     '(-q, --quiet)'{-q,--quiet}'[no output printed to stdout]' \
+                    '--message-format=[error format]:format option:(human json)' \
                     '--color=[coloring]:colorization option:(auto always never)' \
                     ;;
 
@@ -65,6 +66,7 @@ case $state in
                     '--target=[target triple]: :_get_targets' \
                     '(-v, --verbose)'{-v,--verbose}'[use verbose output]' \
                     '(-q, --quiet)'{-q,--quiet}'[no output printed to stdout]' \
+                    '--message-format=[error format]:format option:(human json)' \
                     '--color=[coloring]:colorization option:(auto always never)' \
                     ;;
 
@@ -290,12 +292,14 @@ case $state in
                     '--release=[build in release mode]' \
                     '--target=[target triple]' \
                     '(-v, --verbose)'{-v,--verbose}'[use verbose output]' \
+                    '--message-format=[error format]:format option:(human json)' \
                     '--color=[coloring]:colorization option:(auto always never)' \
                     '*: :_normal' \
                     ;;
 
             rustc)
                 _arguments \
+                    '--message-format=[error format]:format option:(human json)' \
                     '--color=[coloring]:colorization option:(auto always never)' \
                     '--features=[features to compile for the package]' \
                     '--all-features[enable all available features]' \
@@ -314,6 +318,7 @@ case $state in
 
             rustdoc)
                 _arguments \
+                    '--message-format=[error format]:format option:(human json)' \
                     '--color=[coloring]:colorization option:(auto always never)' \
                     '--features=[space-separated list of features to also build]' \
                     '--all-features[enable all available features]' \
@@ -356,6 +361,7 @@ case $state in
                     '--release[build artifacts in release mode, with optimizations]' \
                     '--target=[target triple]: :_get_targets' \
                     '(-v, --verbose)'{-v,--verbose}'[use verbose output]' \
+                    '--message-format=[error format]:format option:(human json)' \
                     '--color=[coloring]:colorization option:(auto always never)' \
                     '1: :_test_names' \
                     '(--doc --bin --example --test --bench)--lib[only test library]' \
