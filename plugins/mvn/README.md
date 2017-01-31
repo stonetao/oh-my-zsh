@@ -26,6 +26,12 @@ if it's found, or the mvn command otherwise.
 | `mvncini`            | `mvn clean initialize`                          |
 | `mvncist`            | `mvn clean install -DskipTests`                 |
 | `mvncisto`           | `mvn clean install -DskipTests --offline`       |
+| `mvne`               | `mvn eclipse:eclipse`                           |
+| `mvncv`              | `mvn clean verify`                              |
+| `mvnd`               | `mvn deploy`                                    |
+| `mvncd`              | `mvn clean deploy`                              |
+| `mvnp`               | `mvn package`                                   |
+| `mvnc`               | `mvn clean`                                     |
 | `mvncom`             | `mvn compile`                                   |
 | `mvncp`              | `mvn clean package`                             |
 | `mvnct`              | `mvn clean test`                                |
