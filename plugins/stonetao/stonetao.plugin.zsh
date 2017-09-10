@@ -1,4 +1,5 @@
 #stonetao personal alias
+<<<<<<< HEAD
 #edit this file
 alias myplugin='vim ~/.oh-my-zsh/plugins/stonetao/stonetao.plugin.zsh'
 #clear
@@ -74,3 +75,12 @@ alias checkoutall='git clean -df && git checkout -- .'
 
 # ligradle alias
 alias idea="ligradle idea"
+=======
+#edit zshrc
+alias editzshrc='cd ~ && vim .zshrc'
+#clear
+alias c='clear'
+#git
+alias gpom='git push origin master'
+alias ps='ps -ef'
+>>>>>>> Add stonetao plugin
