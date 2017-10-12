@@ -70,4 +70,6 @@ alias svnd='svin diff | colordiff'
 
 #git alias
 alias checkoutall='git clean -df && git checkout -- .'
- 
+
+# ligradle alias
+alias idea="ligradle idea"
