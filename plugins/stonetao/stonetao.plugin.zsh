@@ -163,5 +163,11 @@ alias svnd='svin diff | colordiff'
 
 #git alias
 alias checkoutall='git clean -df && git checkout -- .'
+<<<<<<< HEAD
  
 >>>>>>> Move custom alias to stonetao plugin
+=======
+
+# ligradle alias
+alias idea="ligradle idea"
+>>>>>>> add ligradle alias
