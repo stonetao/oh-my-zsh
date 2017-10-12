@@ -3,10 +3,12 @@
 alias myplugin='vim ~/.oh-my-zsh/plugins/stonetao/stonetao.plugin.zsh'
 #clear
 alias c='clear'
+#Change directory
+alias cdaa='cd ~/atc_trunk'
 #git
 alias gpom='git push origin master'
 alias ps='ps -ef'
-
+alias gsa='git submit --async'
 
 
 #LI alias
@@ -16,7 +18,7 @@ alias sreview='svin review -g atc-reviewers'
 alias sci='svin ci -r $1'
 
 ###ssh log in###
-alias ztao='ssh ztao-ld1'
+alias ztao='ssh ztao-ld2'
 alias ep='ssh -A eng-portal'
 
 #ATC mint aliases
@@ -34,7 +36,7 @@ alias al='cd /export/content/lid/logs'
 alias ws='cd ~/workspace/'
 
 # go to metrics
-alias metrics='cd ~/workspace/atc-core-metrics/ && Ruby metrics.rb'
+alias metrics='cd ~/workspace/atc-core-metrics/ && ruby metrics.rb'
 
 # go to oncall metrics
 alias oncall='cd ~/workspace/atc-core-metrics/'
@@ -46,9 +48,9 @@ alias ingraph='cd ~/workspace/inGraphs/'
 alias c='clear'
 
 alias cda="cd ~/workspace/atc_trunk/"
-alias deploy="cd ~/workspace/atc_trunk && ./deploy.py"
+alias deploy="./deploy.py"
 alias alog="cd /export/content/lid/logs/"
-alias undeploy="cd ~/workspace/atc_trunk && ./deploy.py --undeploy"
+alias undeploy="./deploy.py --undeploy"
 
 #svin color diff
 alias svnd='svin diff | colordiff'
