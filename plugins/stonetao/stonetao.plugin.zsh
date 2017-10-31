@@ -96,16 +96,32 @@ alias ps='ps -ef'
 =======
 #git
 alias gpom='git push origin master'
-alias ps='ps -ef'
 alias gsa='git submit --async'
+<<<<<<< HEAD
 >>>>>>> Update alias
+=======
+alias gru='git review update -r $1'
+alias gr='git review'
+>>>>>>> Adding new alias
 
+#Linux
+alias ps='ps -ef'
 
 #LI alias
+
+#ligradle
+alias idea='ligradle idea'
+
+#mint
+alias build='mint build'
+alias cleanbuild='mint clean && mint build'
+
 #svin review
 alias sreview='svin review -g atc-reviewers'
 #svin ci
 alias sci='svin ci -r $1'
+#svin reivew update
+alias sru='svin review update'
 
 ###ssh log in###
 alias ztao='ssh ztao-ld2'
