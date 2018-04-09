@@ -154,6 +154,7 @@ alias ingraph='cd ~/workspace/inGraphs/'
 alias c='clear'
 
 alias cda="cd ~/workspace/atc_trunk/"
+alias cdw="cd ~/workspace/"
 alias deploy="./deploy.py"
 alias alog="cd /export/content/lid/logs/"
 alias undeploy="./deploy.py --undeploy"
