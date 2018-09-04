@@ -24,29 +24,22 @@ fi
 
 if [[ -n "${fzf_base}" ]]; then
 
-  # Fix fzf shell directory for Archlinux package
-  if [[ ! -d "${fzf_base}/shell" ]] && [[ -f /etc/arch-release ]]; then
-    fzf_shell="${fzf_base}"
-  else
-    fzf_shell="${fzf_base}/shell"
-  fi
-
   # Setup fzf
   # ---------
-  if ! (( ${+commands[fzf]} )) && [[ ! "$PATH" == *$fzf_base/bin* ]]; then
+  if [[ ! "$PATH" == *$fzf_base/bin* ]]; then
     export PATH="$PATH:$fzf_base/bin"
   fi
   
   # Auto-completion
   # ---------------
   if [[ ! "$DISABLE_FZF_AUTO_COMPLETION" == "true" ]]; then
-    [[ $- == *i* ]] && source "${fzf_shell}/completion.zsh" 2> /dev/null
+    [[ $- == *i* ]] && source "$fzf_base/shell/completion.zsh" 2> /dev/null
   fi
   
   # Key bindings
   # ------------
   if [[ ! "$DISABLE_FZF_KEY_BINDINGS" == "true" ]]; then
-    source "${fzf_shell}/key-bindings.zsh"
+    source "$fzf_base/shell/key-bindings.zsh"
   fi
 
 else
@@ -54,4 +47,4 @@ else
         "Please add \`export FZF_BASE=/path/to/fzf/install/dir\` to your .zshrc" >&2
 fi
 
-unset fzf_base fzf_shell dir fzfdirs
+unset fzf_base
