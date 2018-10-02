@@ -1,7 +1,6 @@
 # Tmuxinator plugin
 
-This plugin provides completion for [tmuxinator](https://github.com/tmuxinator/tmuxinator),
-as well as aliases for frequent tmuxinator commands.
+This plugin provides 4 aliases for tmuxinator commands.
 
 To use it add `tmuxinator` to the plugins array in your zshrc file.
 
@@ -13,7 +12,7 @@ plugins=(... tmuxinator)
 
 | Alias  | Command          | Description              |
 | ------ | ---------------- | ------------------------ |
-| `txs ` | tmuxinator start | Start Tmuxinator         |
+| `txs ` | tmuxinator start | Start                    |
 | `txo ` | tmuxinator open  | Open project for editing |
 | `txn ` | tmuxinator new   | Create project           |
 | `txl ` | tmuxinator list  | List projects            |
