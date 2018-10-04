@@ -25,3 +25,4 @@ plugins=(... yum)
 | ygr   | `sudo yum groupremove`            | Remove pagage group          |
 | yrl   | `sudo yum remove --remove-leaves` | Remove package and leaves    |
 | yc    | `sudo yum clean all`              | Clean yum cache              |
+
