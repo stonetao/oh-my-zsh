@@ -20,6 +20,15 @@ BACKGROUND_CYAN=$(tput setab 6)
 BACKGROUND_WHITE=$(tput setab 7)
 RESET_FORMATTING=$(tput sgr0)
 
+# if found an executable ./mvnw file execute it otherwise execute orignal mvn
+mvn-or-mvnw() {
+	if [ -x ./mvnw ] ; then
+		echo "executing mvnw instead of mvn"		
+		./mvnw "$@";
+	else
+		mvn "$@";
+	fi
+}
 
 # Wrapper function for Maven's mvn command.
 mvn-color() {
