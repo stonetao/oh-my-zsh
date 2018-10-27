@@ -1,4 +1,25 @@
-# AWS profile selection
+_homebrew-installed() {
+  type brew &> /dev/null
+  _xit=$?
+  if [ $_xit -eq 0 ];then
+        # ok , we have brew installed
+        # speculatively we check default brew prefix
+        if [ -h  /usr/local/opt/awscli ];then
+                _brew_prefix="/usr/local/opt/awscli"
+        else
+                # ok , it is not default prefix
+                # this call to brew is expensive ( about 400 ms ), so at least let's make it only once
+                _brew_prefix=$(brew --prefix awscli)
+        fi
+        return 0
+   else
+        return $_xit
+   fi
+}
+
+_awscli-homebrew-installed() {
+  [ -r $_brew_prefix/libexec/bin/aws_zsh_completer.sh ] &> /dev/null
+}
 
 function agp {
   echo $AWS_PROFILE
@@ -13,16 +34,7 @@ function asp {
 }
 
 function aws_profiles {
-  reply=($(grep '\[profile' "${AWS_CONFIG_FILE:-$HOME/.aws/config}"|sed -e 's/.*profile \([a-zA-Z0-9_\.-]*\).*/\1/'))
-}
-compctl -K aws_profiles asp aws_change_access_key
-
-
-# AWS prompt
-
-function aws_prompt_info() {
-  [[ -z $AWS_PROFILE ]] && return
-  echo "${ZSH_THEME_AWS_PREFIX:=<aws:}${AWS_PROFILE}${ZSH_THEME_AWS_SUFFIX:=>}"
+  reply=($(grep profile "${AWS_CONFIG_FILE:-$HOME/.aws/config}"|sed -e 's/.*profile \([a-zA-Z0-9_\.-]*\).*/\1/'))
 }
 
 if [ "$SHOW_AWS_PROMPT" != false ]; then
