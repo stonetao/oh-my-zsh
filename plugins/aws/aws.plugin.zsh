@@ -9,25 +9,7 @@ function asp {
   export AWS_PROFILE=$1
   export AWS_EB_PROFILE=$1
 
-  if [[ -z "$1" ]]; then
-    echo AWS profile cleared.
-  fi
-}
-
-function aws_change_access_key {
-  if [[ -z "$1" ]] then
-    echo "usage: $0 <profile>"
-    return 1
-  fi
-
-  echo Insert the credentials when asked.
-  asp "$1"
-  aws iam create-access-key
-  aws configure --profile "$1"
-
-  echo You can now safely delete the old access key running \`aws iam delete-access-key --access-key-id ID\`
-  echo Your current keys are:
-  aws iam list-access-keys
+  export RPROMPT="<aws:$AWS_PROFILE>$rprompt"
 }
 
 function aws_profiles {
