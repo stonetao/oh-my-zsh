@@ -34,7 +34,7 @@ function asp {
 }
 
 function aws_profiles {
-  reply=($(grep profile "${AWS_CONFIG_FILE:-$HOME/.aws/config}"|sed -e 's/.*profile \([a-zA-Z0-9_\.-]*\).*/\1/'))
+  reply=($(grep '\[profile' "${AWS_CONFIG_FILE:-$HOME/.aws/config}"|sed -e 's/.*profile \([a-zA-Z0-9_\.-]*\).*/\1/'))
 }
 
 if [ "$SHOW_AWS_PROMPT" != false ]; then
