@@ -1,4 +1,4 @@
-# if found an executable ./mvnw file execute it otherwise execute orignal mvn
+# Calls ./mvnw if found, otherwise execute the original mvn
 mvn-or-mvnw() {
 	if [ -x ./mvnw ]; then
 		echo "executing mvnw instead of mvn"
@@ -8,8 +8,7 @@ mvn-or-mvnw() {
 	fi
 }
 
-# Wrapper function for Maven's mvn command.
-# based on https://gist.github.com/1027800
+# Wrapper function for Maven's mvn command. Based on https://gist.github.com/1027800
 mvn-color() {
 	local BOLD=$(echoti bold)
 	local TEXT_RED=$(echoti setaf 1)
@@ -34,37 +33,30 @@ mvn-color() {
 	)
 }
 
-# either use orignal mvn oder the mvn wrapper
+# either use orignal mvn or the mvn wrapper
 alias mvn="mvn-or-mvnw"
 
 # Run mvn against the pom found in a project's root directory (assumes a git repo)
 alias 'mvn!'='mvn -f $(git rev-parse --show-toplevel 2>/dev/null || echo ".")/pom.xml'
 
 # aliases
-alias mvncini='mvn clean initialize'
-alias mvncie='mvn clean install eclipse:eclipse'
+alias mvnag='mvn archetype:generate'
+alias mvnboot='mvn spring-boot:run'
+alias mvnc='mvn clean'
+alias mvncd='mvn clean deploy'
+alias mvnce='mvn clean eclipse:clean eclipse:eclipse'
 alias mvnci='mvn clean install'
-alias mvncp='mvn clean package'
+alias mvncie='mvn clean install eclipse:eclipse'
+alias mvncini='mvn clean initialize'
 alias mvncist='mvn clean install -DskipTests'
 alias mvncisto='mvn clean install -DskipTests --offline'
-alias mvne='mvn eclipse:eclipse'
-alias mvnce='mvn clean eclipse:clean eclipse:eclipse'
-alias mvncv='mvn clean verify'
-alias mvncvst='mvn clean verify -DskipTests'
-alias mvnd='mvn deploy'
-alias mvncd='mvn clean deploy'
-alias mvnp='mvn package'
-alias mvnc='mvn clean'
 alias mvncom='mvn compile'
 alias mvncp='mvn clean package'
 alias mvnct='mvn clean test'
-alias mvnt='mvn test'
-alias mvnag='mvn archetype:generate'
-alias mvn-updates='mvn versions:display-dependency-updates'
-alias mvntc7='mvn tomcat7:run'
-alias mvntc='mvn tomcat:run'
-alias mvnjetty='mvn jetty:run'
-alias mvnboot='mvn spring-boot:run'
+alias mvncv='mvn clean verify'
+alias mvncvst='mvn clean verify -DskipTests'
+alias mvnd='mvn deploy'
+alias mvndocs='mvn dependency:resolve -Dclassifier=javadoc'
 alias mvndt='mvn dependency:tree'
 alias mvne='mvn eclipse:eclipse'
 alias mvnjetty='mvn jetty:run'
@@ -75,105 +67,6 @@ alias mvnt='mvn test'
 alias mvntc='mvn tomcat:run'
 alias mvntc7='mvn tomcat7:run'
 alias mvn-updates='mvn versions:display-dependency-updates'
-
-
-function listMavenCompletions {
-	local file new_file
-	local -a profiles POM_FILES
-
-	# Root POM
-	POM_FILES=(~/.m2/settings.xml)
-
-	# POM in the current directory
-	if [[ -f pom.xml ]]; then
-		local file=pom.xml
-		POM_FILES+=("${file:A}")
-	fi
-
-	# Look for POM files in parent directories
-	while [[ -n "$file" ]] && grep -q "<parent>" "$file"; do
-		# look for a new relativePath for parent pom.xml
-		new_file=$(grep -e "<relativePath>.*</relativePath>" "$file" | sed -e 's/.*<relativePath>\(.*\)<\/relativePath>.*/\1/')
-
-		# if <parent> is present but not defined, assume ../pom.xml
-		if [[ -z "$new_file" ]]; then
-			new_file="../pom.xml"
-		fi
-
-		# if file doesn't exist break
-		file="${file:h}/${new_file}"
-		if ! [[ -e "$file" ]]; then
-			break
-		fi
-
-		POM_FILES+=("${file:A}")
-	done
-
-	# Get profiles from found files
-	for file in $POM_FILES; do
-		[[ -e $file ]] || continue
-		profiles+=($(sed 's/<!--.*-->//' "$file" | sed '/<!--/,/-->/d' | grep -e "<profile>" -A 1 | grep -e "<id>.*</id>" | sed 's?.*<id>\(.*\)<\/id>.*?-P\1?'))
-	done
-
-	reply=(
-		# common lifecycle
-		clean initialize process-resources compile process-test-resources test-compile test package verify install deploy site
-
-		# integration testing
-		pre-integration-test integration-test
-
-		# common plugins
-		deploy failsafe install site surefire checkstyle javadoc jxr pmd ant antrun archetype assembly dependency enforcer gpg help release repository source eclipse idea jetty cargo jboss tomcat tomcat6 tomcat7 exec versions war ear ejb android scm buildnumber nexus repository sonar license hibernate3 liquibase flyway gwt
-
-		# deploy
-		deploy:deploy-file
-		# failsafe
-		failsafe:integration-test failsafe:verify
-		# install
-		install:install-file install:help
-		# site
-		site:site site:deploy site:run site:stage site:stage-deploy site:attach-descriptor site:jar site:effective-site
-		# surefire
-		surefire:test
-
-		# checkstyle
-		checkstyle:checkstyle checkstyle:check checkstyle:checkstyle-aggregate
-		# javadoc
-		javadoc:javadoc javadoc:test-javadoc javadoc:javadoc-no-fork javadoc:test-javadoc-no-fork javadoc:aggregate javadoc:test-aggregate javadoc:jar javadoc:test-jar javadoc:aggregate-jar javadoc:test-aggregate-jar javadoc:fix javadoc:test-fix javadoc:resource-bundle javadoc:test-resource-bundle
-		# jxr
-		jxr:jxr jxr:aggregate jxr:test-jxr jxr:test-aggregate
-		# pmd
-		pmd:pmd pmd:cpd pmd:check pmd:cpd-check
-
-		# ant
-		ant:ant ant:clean
-		# antrun
-		antrun:run
-		# archetype
-		archetype:generate archetype:create-from-project archetype:crawl
-		# assembly
-		assembly:single assembly:assembly
-		# dependency
-		dependency:analyze dependency:analyze-dep-mgt dependency:analyze-only dependency:analyze-report dependency:analyze-duplicate dependency:build-classpath dependency:copy dependency:copy-dependencies dependency:display-ancestors dependency:get dependency:go-offline dependency:list dependency:list-repositories dependency:properties dependency:purge-local-repository dependency:resolve dependency:resolve-plugins dependency:sources dependency:tree dependency:unpack dependency:unpack-dependencies
-		# enforcer
-		enforcer:enforce enforcer:display-info
-		# gpg
-		gpg:sign gpg:sign-and-deploy-file
-		# help
-		help:active-profiles help:all-profiles help:describe help:effective-pom help:effective-settings help:evaluate help:expressions help:system
-		# release
-		release:clean release:prepare release:prepare-with-pom release:rollback release:perform release:stage release:branch release:update-versions
-		# jgitflow
-		jgitflow:feature-start jgitflow:feature-finish jgitflow:release-start jgitflow:release-finish jgitflow:hotfix-start jgitflow:hotfix-finish jgitflow:build-number
-		# repository
-		repository:bundle-create repository:bundle-pack
-		# source
-		source:aggregate source:jar source:jar-no-fork source:test-jar source:test-jar-no-fork
-
-		# eclipse
-		eclipse:clean eclipse:eclipse
-		# idea
-		idea:clean idea:idea
 
 		# jetty
 		jetty:run jetty:run-exploded
