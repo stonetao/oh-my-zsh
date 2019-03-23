@@ -1,31 +1,10 @@
-_homebrew-installed() {
-  type brew &> /dev/null
-  _xit=$?
-  if [ $_xit -eq 0 ];then
-        # ok , we have brew installed
-        # speculatively we check default brew prefix
-        if [ -h  /usr/local/opt/awscli ];then
-                _brew_prefix="/usr/local/opt/awscli"
-        else
-                # ok , it is not default prefix
-                # this call to brew is expensive ( about 400 ms ), so at least let's make it only once
-                _brew_prefix=$(brew --prefix awscli)
-        fi
-        return 0
-   else
-        return $_xit
-   fi
-}
-
-_awscli-homebrew-installed() {
-  [ -r $_brew_prefix/libexec/bin/aws_zsh_completer.sh ] &> /dev/null
-}
-
 function agp {
   echo $AWS_PROFILE
 }
 
 function asp {
+  local rprompt=${RPROMPT/<aws:$AWS_PROFILE>/}
+
   export AWS_DEFAULT_PROFILE=$1
   export AWS_PROFILE=$1
   export AWS_EB_PROFILE=$1
@@ -36,10 +15,6 @@ function asp {
 function aws_profiles {
   reply=($(grep '\[profile' "${AWS_CONFIG_FILE:-$HOME/.aws/config}"|sed -e 's/.*profile \([a-zA-Z0-9_\.-]*\).*/\1/'))
 }
-
-if [ "$SHOW_AWS_PROMPT" != false ]; then
-  export RPROMPT='$(aws_prompt_info)'"$RPROMPT"
-fi
 
 
 # Load awscli completions
