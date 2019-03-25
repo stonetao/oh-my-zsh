@@ -45,11 +45,10 @@ case $state in
                     '--no-default-features[do not build the default features]' \
                     '--no-run[compile but do not run]' \
                     '(-p,--package)'{-p=,--package=}'[package to run benchmarks for]:packages:_get_package_names' \
-                    '--target=[target triple]: :_get_targets' \
+                    '--target=[target triple]' \
                     '(-v, --verbose)'{-v,--verbose}'[use verbose output]' \
                     '(-q, --quiet)'{-q,--quiet}'[no output printed to stdout]' \
-                    '--message-format=[error format]:format option:(human json)' \
-                    '--color=[coloring]:colorization option:(auto always never)' \
+                    '--color=:colorization option:(auto always never)' \
                     ;;
 
             build)
@@ -63,11 +62,27 @@ case $state in
                     '--no-default-features[do not build the default features]' \
                     '(-p,--package)'{-p=,--package=}'[package to build]:packages:_get_package_names' \
                     '--release=[build in release mode]' \
-                    '--target=[target triple]: :_get_targets' \
+                    '--target=[target triple]' \
                     '(-v, --verbose)'{-v,--verbose}'[use verbose output]' \
                     '(-q, --quiet)'{-q,--quiet}'[no output printed to stdout]' \
-                    '--message-format=[error format]:format option:(human json)' \
-                    '--color=[coloring]:colorization option:(auto always never)' \
+                    '--color=:colorization option:(auto always never)' \
+                    ;;
+
+            check)
+                _arguments \
+                    '--features=[space separated feature list]' \
+                    '--all-features[enable all available features]' \
+                    '(-h, --help)'{-h,--help}'[show help message]' \
+                    '(-j, --jobs)'{-j,--jobs}'[number of parallel jobs, defaults to # of CPUs]' \
+                    "${command_scope_spec[@]}" \
+                    '--manifest-path=[path to manifest]: :_files -/' \
+                    '--no-default-features[do not check the default features]' \
+                    '(-p,--package)'{-p=,--package=}'[package to check]:packages:_get_package_names' \
+                    '--release=[check in release mode]' \
+                    '--target=[target triple]' \
+                    '(-v, --verbose)'{-v,--verbose}'[use verbose output]' \
+                    '(-q, --quiet)'{-q,--quiet}'[no output printed to stdout]' \
+                    '--color=:colorization option:(auto always never)' \
                     ;;
 
             check)
@@ -94,9 +109,9 @@ case $state in
                     '(-p,--package)'{-p=,--package=}'[package to clean]:packages:_get_package_names' \
                     '(-q, --quiet)'{-q,--quiet}'[no output printed to stdout]' \
                     '--release[whether or not to clean release artifacts]' \
-                    '--target=[target triple(default:all)]: :_get_targets' \
+                    '--target=[target triple(default:all)]' \
                     '(-v, --verbose)'{-v,--verbose}'[use verbose output]' \
-                    '--color=[coloring]:colorization option:(auto always never)' \
+                    '--color=:colorization option:(auto always never)' \
                     ;;
 
             doc)
@@ -112,9 +127,9 @@ case $state in
                     '(-p, --package)'{-p,--package}'=[package to document]' \
                     '(-q, --quiet)'{-q,--quiet}'[no output printed to stdout]' \
                     '--release[build artifacts in release mode, with optimizations]' \
-                    '--target=[build for the target triple]: :_get_targets' \
+                    '--target=[build for the target triple]' \
                     '(-v, --verbose)'{-v,--verbose}'[use verbose output]' \
-                    '--color=[coloring]:colorization option:(auto always never)' \
+                    '--color=:colorization option:(auto always never)' \
                     ;;
 
             fetch)
@@ -123,7 +138,7 @@ case $state in
                     '--manifest-path=[path to manifest]: :_files -/' \
                     '(-q, --quiet)'{-q,--quiet}'[no output printed to stdout]' \
                     '(-v, --verbose)'{-v,--verbose}'[use verbose output]' \
-                    '--color=[coloring]:colorization option:(auto always never)' \
+                    '--color=:colorization option:(auto always never)' \
                     ;;
 
             generate-lockfile)
@@ -132,7 +147,7 @@ case $state in
                     '--manifest-path=[path to manifest]: :_files -/' \
                     '(-q, --quiet)'{-q,--quiet}'[no output printed to stdout]' \
                     '(-v, --verbose)'{-v,--verbose}'[use verbose output]' \
-                    '--color=[coloring]:colorization option:(auto always never)' \
+                    '--color=:colorization option:(auto always never)' \
                     ;;
 
             git-checkout)
@@ -142,7 +157,7 @@ case $state in
                     '--reference=[REF]' \
                     '--url=[URL]' \
                     '(-v, --verbose)'{-v,--verbose}'[use verbose output]' \
-                    '--color=[coloring]:colorization option:(auto always never)' \
+                    '--color=:colorization option:(auto always never)' \
                     ;;
 
             help)
@@ -159,14 +174,14 @@ case $state in
                     '--name=[set the resulting package name]' \
                     '(-q, --quiet)'{-q,--quiet}'[no output printed to stdout]' \
                     '(-v, --verbose)'{-v,--verbose}'[use verbose output]' \
-                    '--color=[coloring]:colorization option:(auto always never)' \
+                    '--color=:colorization option:(auto always never)' \
                     ;;
 
             install)
                 _arguments \
                     '--bin=[only install the specified binary]' \
                     '--branch=[branch to use when installing from git]' \
-                    '--color=[coloring]:colorization option:(auto always never)' \
+                    '--color=:colorization option:(auto always never)' \
                     '--debug[build in debug mode instead of release mode]' \
                     '--example[install the specified example instead of binaries]' \
                     '--features=[space separated feature list]' \
@@ -196,7 +211,7 @@ case $state in
                     '--host=[Host to set the token for]' \
                     '(-q, --quiet)'{-q,--quiet}'[no output printed to stdout]' \
                     '(-v, --verbose)'{-v,--verbose}'[use verbose output]' \
-                    '--color=[coloring]:colorization option:(auto always never)' \
+                    '--color=:colorization option:(auto always never)' \
                     ;;
 
             metadata)
@@ -210,7 +225,7 @@ case $state in
                     '--features=[space separated feature list]' \
                     '--all-features[enable all available features]' \
                     '--format-version=[format version(default: 1)]' \
-                    '--color=[coloring]:colorization option:(auto always never)' \
+                    '--color=:colorization option:(auto always never)' \
                     ;;
 
             new)
@@ -221,7 +236,7 @@ case $state in
                     '--name=[set the resulting package name]' \
                     '(-q, --quiet)'{-q,--quiet}'[no output printed to stdout]' \
                     '(-v, --verbose)'{-v,--verbose}'[use verbose output]' \
-                    '--color=[coloring]:colorization option:(auto always never)' \
+                    '--color=:colorization option:(auto always never)' \
                     ;;
 
             owner)
@@ -234,7 +249,7 @@ case $state in
                     '(-r, --remove)'{-r,--remove}'[remove owner LOGIN]' \
                     '--token[API token to use when authenticating]' \
                     '(-v, --verbose)'{-v,--verbose}'[use verbose output]' \
-                    '--color=[coloring]:colorization option:(auto always never)' \
+                    '--color=:colorization option:(auto always never)' \
                     ;;
 
             package)
@@ -246,7 +261,7 @@ case $state in
                     '--no-verify[do not build to verify contents]' \
                     '(-q, --quiet)'{-q,--quiet}'[no output printed to stdout]' \
                     '(-v, --verbose)'{-v,--verbose}'[use verbose output]' \
-                    '--color=[coloring]:colorization option:(auto always never)' \
+                    '--color=:colorization option:(auto always never)' \
                     ;;
 
             pkgid)
@@ -255,7 +270,7 @@ case $state in
                     '--manifest-path=[path to manifest]: :_files -/' \
                     '(-q, --quiet)'{-q,--quiet}'[no output printed to stdout]' \
                     '(-v, --verbose)'{-v,--verbose}'[use verbose output]' \
-                    '--color=[coloring]:colorization option:(auto always never)' \
+                    '--color=:colorization option:(auto always never)' \
                     ;;
 
             publish)
@@ -267,7 +282,7 @@ case $state in
                     '(-q, --quiet)'{-q,--quiet}'[no output printed to stdout]' \
                     '--token[token to use when uploading]' \
                     '(-v, --verbose)'{-v,--verbose}'[use verbose output]' \
-                    '--color=[coloring]:colorization option:(auto always never)' \
+                    '--color=:colorization option:(auto always never)' \
                     ;;
 
             read-manifest)
@@ -275,7 +290,7 @@ case $state in
                     '(-h, --help)'{-h,--help}'[show help message]' \
                     '--manifest-path=[path to manifest]: :_files -/' \
                     '(-v, --verbose)'{-v,--verbose}'[use verbose output]' \
-                    '--color=[coloring]:colorization option:(auto always never)' \
+                    '--color=:colorization option:(auto always never)' \
                     ;;
 
             run)
@@ -292,15 +307,13 @@ case $state in
                     '--release=[build in release mode]' \
                     '--target=[target triple]' \
                     '(-v, --verbose)'{-v,--verbose}'[use verbose output]' \
-                    '--message-format=[error format]:format option:(human json)' \
-                    '--color=[coloring]:colorization option:(auto always never)' \
+                    '--color=:colorization option:(auto always never)' \
                     '*: :_normal' \
                     ;;
 
             rustc)
                 _arguments \
-                    '--message-format=[error format]:format option:(human json)' \
-                    '--color=[coloring]:colorization option:(auto always never)' \
+                    '--color=:colorization option:(auto always never)' \
                     '--features=[features to compile for the package]' \
                     '--all-features[enable all available features]' \
                     '(-h, --help)'{-h,--help}'[show help message]' \
@@ -311,15 +324,14 @@ case $state in
                     '--profile=[profile to build the selected target for]' \
                     '(-q, --quiet)'{-q,--quiet}'[no output printed to stdout]' \
                     '--release[build artifacts in release mode, with optimizations]' \
-                    '--target=[target triple which compiles will be for]: :_get_targets' \
+                    '--target=[target triple which compiles will be for]' \
                     '(-v, --verbose)'{-v,--verbose}'[use verbose output]' \
                     "${command_scope_spec[@]}" \
                     ;;
 
             rustdoc)
                 _arguments \
-                    '--message-format=[error format]:format option:(human json)' \
-                    '--color=[coloring]:colorization option:(auto always never)' \
+                    '--color=:colorization option:(auto always never)' \
                     '--features=[space-separated list of features to also build]' \
                     '--all-features[enable all available features]' \
                     '(-h, --help)'{-h,--help}'[show help message]' \
@@ -330,14 +342,14 @@ case $state in
                     '(-p, --package)'{-p,--package}'=[package to document]' \
                     '(-q, --quiet)'{-q,--quiet}'[no output printed to stdout]' \
                     '--release[build artifacts in release mode, with optimizations]' \
-                    '--target=[build for the target triple]: :_get_targets' \
+                    '--target=[build for the target triple]' \
                     '(-v, --verbose)'{-v,--verbose}'[use verbose output]' \
                     "${command_scope_spec[@]}" \
                     ;;
 
             search)
                 _arguments \
-                    '--color=[coloring]:colorization option:(auto always never)' \
+                    '--color=:colorization option:(auto always never)' \
                     '(-h, --help)'{-h,--help}'[show help message]' \
                     '--host=[host of a registry to search in]' \
                     '--limit=[limit the number of results]' \
@@ -359,10 +371,9 @@ case $state in
                     '(-p,--package)'{-p=,--package=}'[package to run tests for]:packages:_get_package_names' \
                     '(-q, --quiet)'{-q,--quiet}'[no output printed to stdout]' \
                     '--release[build artifacts in release mode, with optimizations]' \
-                    '--target=[target triple]: :_get_targets' \
+                    '--target=[target triple]' \
                     '(-v, --verbose)'{-v,--verbose}'[use verbose output]' \
-                    '--message-format=[error format]:format option:(human json)' \
-                    '--color=[coloring]:colorization option:(auto always never)' \
+                    '--color=:colorization option:(auto always never)' \
                     '1: :_test_names' \
                     '(--doc --bin --example --test --bench)--lib[only test library]' \
                     '(--lib --bin --example --test --bench)--doc[only test documentation]' \
@@ -378,7 +389,7 @@ case $state in
             uninstall)
                 _arguments \
                     '--bin=[only uninstall the binary NAME]' \
-                    '--color=[coloring]:colorization option:(auto always never)' \
+                    '--color=:colorization option:(auto always never)' \
                     '(-h, --help)'{-h,--help}'[show help message]' \
                     '(-q, --quiet)'{-q,--quiet}'[less output printed to stdout]' \
                     '--root=[directory to uninstall packages from]: :_files -/' \
@@ -394,7 +405,7 @@ case $state in
                     '--precise=[update single dependency to PRECISE]: :' \
                     '(-q, --quiet)'{-q,--quiet}'[no output printed to stdout]' \
                     '(-v, --verbose)'{-v,--verbose}'[use verbose output]' \
-                    '--color=[coloring]:colorization option:(auto always never)' \
+                    '--color=:colorization option:(auto always never)' \
                     ;;
 
             verify-project)
@@ -403,14 +414,14 @@ case $state in
                     '--manifest-path=[path to manifest]: :_files -/' \
                     '(-q, --quiet)'{-q,--quiet}'[no output printed to stdout]' \
                     '(-v, --verbose)'{-v,--verbose}'[use verbose output]' \
-                    '--color=[coloring]:colorization option:(auto always never)' \
+                    '--color=:colorization option:(auto always never)' \
                     ;;
 
             version)
                 _arguments \
                     '(-h, --help)'{-h,--help}'[show help message]' \
                     '(-v, --verbose)'{-v,--verbose}'[use verbose output]' \
-                    '--color=[coloring]:colorization option:(auto always never)' \
+                    '--color=:colorization option:(auto always never)' \
                     ;;
 
             yank)
@@ -421,7 +432,7 @@ case $state in
                     '--token[API token to use when authenticating]' \
                     '--undo[undo a yank, putting a version back into the index]' \
                     '(-v, --verbose)'{-v,--verbose}'[use verbose output]' \
-                    '--color=[coloring]:colorization option:(auto always never)' \
+                    '--color=:colorization option:(auto always never)' \
                     '--vers[yank version]' \
                     ;;
         esac
@@ -430,7 +441,6 @@ esac
 }
 
 _cargo_cmds(){
-local IFS=$'\n'
 local -a commands;commands=(
 'bench:execute all benchmarks of a local package'
 'build:compile the current package'
@@ -462,7 +472,6 @@ local -a commands;commands=(
 'verify-project:check Cargo.toml'
 'version:show version information'
 'yank:remove pushed file from index'
-$( cargo --list | sed -n '1!p' | tr -s ' ' | cut -d ' ' -f 2 | egrep -v "^bench$|^build$|^clean$|^doc$|^fetch$|^generate-lockfile$|^git-checkout$|^help$|^init$|^install$|^locate-project$|^login$|^metadata$|^new$|^owner$|^package$|^pkgid$|^publish$|^read-manifest$|^run$|^rustc$|^rustdoc$|^search$|^test$|^uninstall$|^update$|^verify-project$|^version$|^yank$" | sed "s/\(.*\)/echo \"\1:$\(cargo help \1 2>\&1 | head -n 1\)\"/" | sh )
 )
 _describe -t common-commands 'common commands' commands
 }
@@ -537,38 +546,7 @@ _benchmark_names()
     _get_names_from_array "bench"
 }
 
-#Gets the target names from config files
-_get_targets()
-{
-    local CURRENT_PATH
-    if [[ $(uname -o) = "Cygwin" && -f "$PWD"/Cargo.toml ]]; then
-            CURRENT_PATH=$PWD
-    else
-            CURRENT_PATH=$(_locate_manifest)
-    fi
-    if [[ -z "$CURRENT_PATH" ]]; then
-            return 1
-    fi
-    local -a TARGETS
-    local -a FIND_PATHS=( "/" )
-    local -a FLINES
-    local FIND_PATH FLINE
-    while [[ "$CURRENT_PATH" != "/" ]]; do
-        FIND_PATHS+=( "$CURRENT_PATH" )
-        CURRENT_PATH=$(dirname $CURRENT_PATH)
-    done
-    for FIND_PATH in ${FIND_PATHS[@]}; do
-        if [[ -f "$FIND_PATH"/.cargo/config ]]; then
-            FLINES=( `grep "$FIND_PATH"/.cargo/config -e "^\[target\."` )
-            for FLINE in ${FLINES[@]}; do
-                TARGETS+=(`sed 's/^\[target\.\(.*\)\]$/\1/' <<< $FLINE`)
-            done
-        fi
-    done
-    _describe 'target' TARGETS
-}
-
-# These flags are mutally exclusive specifiers for the scope of a command; as
+# These flags are mutually exclusive specifiers for the scope of a command; as
 # they are used in multiple places without change, they are expanded into the
 # appropriate command's `_arguments` where appropriate.
 set command_scope_spec
