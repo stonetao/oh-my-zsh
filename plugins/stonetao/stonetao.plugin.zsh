@@ -1,13 +1,10 @@
 #stonetao personal alias
-<<<<<<< HEAD
-<<<<<<< HEAD
 #edit this file
 alias myplugin='vim ~/.oh-my-zsh/plugins/stonetao/stonetao.plugin.zsh'
 #clear
 alias c='clear'
 #Change directory
 alias cdaa='cd ~/atc_trunk'
-<<<<<<< HEAD
 #git
 alias gpom='git push origin master'
 alias gsa='git submit --async'
@@ -77,32 +74,20 @@ alias checkoutall='git clean -df && git checkout -- .'
 
 # ligradle alias
 alias idea="ligradle idea"
-=======
 #edit zshrc
 alias editzshrc='cd ~ && vim .zshrc'
-=======
 #edit this file
 alias myplugin='vim ~/.oh-my-zsh/plugins/stonetao/stonetao.plugin.zsh'
->>>>>>> Move custom alias to stonetao plugin
 #clear
 alias c='clear'
 #git
 alias gpom='git push origin master'
 alias ps='ps -ef'
-<<<<<<< HEAD
->>>>>>> Add stonetao plugin
-=======
-
-=======
 #git
 alias gpom='git push origin master'
 alias gsa='git submit --async'
-<<<<<<< HEAD
->>>>>>> Update alias
-=======
 alias gru='git review update -r $1'
 alias gr='git review'
->>>>>>> Adding new alias
 
 #Linux
 alias ps='ps -ef'
@@ -164,11 +149,6 @@ alias svnd='svin diff | colordiff'
 
 #git alias
 alias checkoutall='git clean -df && git checkout -- .'
-<<<<<<< HEAD
- 
->>>>>>> Move custom alias to stonetao plugin
-=======
 
 # ligradle alias
 alias idea="ligradle idea"
->>>>>>> add ligradle alias
